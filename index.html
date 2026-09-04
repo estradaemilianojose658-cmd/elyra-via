@@ -1,47 +1,60 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Elyra VIA - De Chat a Libro</title>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Elyra VIA — Tu vida, en un libro que te recuerda</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box}
-:root{--bg:#faf7f2;--card:#fff;--brown:#2b1d1a;--accent:#c68a5a;--line:#eee6da}
-body{margin:0;background:var(--bg);color:var(--brown);font-family:system-ui,-apple-system,sans-serif}
-.wrap{max-width:1100px;margin:0 auto;padding:24px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
-.phone{border:12px solid #111;border-radius:40px;background:var(--card);padding:20px;min-height:520px;box-shadow:0 10px 30px rgba(0,0,0,.1);overflow:hidden}
-.btn{width:100%;background:var(--accent);color:white;border:0;padding:14px;border-radius:30px;font-weight:700;cursor:pointer;margin-top:12px}
-.btn2{background:#fff;color:var(--brown);border:1px solid var(--line)}
-input{width:100%;padding:12px;border-radius:12px;border:1px solid #ddd;outline:none}
-input:focus{border-color:var(--accent)}
-.tag{background:#eef2ff;padding:4px 10px;border-radius:20px;font-size:12px;display:inline-block;margin-top:6px}
-.box{background:#fdf1e3;border-radius:16px;padding:20px;text-align:center;margin:14px 0}
-.item{background:var(--bg);border:1px solid var(--line);padding:10px 14px;border-radius:20px;margin:8px 0;font-size:14px}
-#drop{border:2px dashed var(--accent);border-radius:20px;padding:30px;text-align:center;cursor:pointer}
+body{margin:0;background:#FBF8F3;color:#1A1A1A;font-family:'Inter',sans-serif}
+h1,h2{font-family:'Fraunces',serif;font-weight:700;letter-spacing:-0.02em}
+.hero{max-width:900px;margin:0 auto;padding:80px 24px 40px;text-align:center}
+.hero h1{font-size:56px;line-height:0.95;margin:0}
+.hero h1 em{font-style:italic;font-weight:400;color:#8B5E3C}
+.hero p{max-width:520px;margin:24px auto 0;color:#6B6B6B;line-height:1.6;font-size:18px}
+.card{max-width:680px;margin:40px auto;background:white;border-radius:24px;padding:32px;box-shadow:0 12px 40px rgba(0,0,0,0.06);border:1px solid #F0E9DF}
+.drop{border:1px dashed #D9C5B0;background:#FFFEFB;border-radius:16px;padding:40px 20px;text-align:center;cursor:pointer;transition:.2s}
+.drop:hover{background:#FDF6EC;border-color:#8B5E3C}
+.btn{background:#1A1A1A;color:white;border:0;padding:14px 28px;border-radius:999px;font-weight:500;cursor:pointer;width:100%;margin-top:16px}
+.meta{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#9A9A9A;text-align:center;margin-top:80px}
 </style>
 </head>
 <body>
-<div class="wrap">
-<h1 style="text-align:center">Elyra VIA • De Chat a Libro</h1>
-<div class="grid">
-
-<div class="phone">
-<h3>🔐 Acceso</h3>
-<input id="email" placeholder="Tu email">
-<button class="btn" onclick="login()">Continuar</button>
-<p style="font-size:12px;text-align:center;margin-top:20px;color:#888">Sin compromiso • Privado y seguro</p>
+<div class="hero">
+<p style="letter-spacing:0.2em;text-transform:uppercase;font-size:11px;color:#8B5E3C">Elyra VIA</p>
+<h1>Tu vida no cabe en un chat.<br><em>Merece un libro.</em></h1>
+<p>Convierte tus conversaciones de WhatsApp, Telegram o Instagram en una memoria viva. Privada. Tuya. Para que una IA te recuerde como tú te recuerdas.</p>
 </div>
 
-<div class="phone">
-<h3>📤 Importar historia</h3>
-<p style="font-size:14px">Sube tu export de WhatsApp, Telegram o Instagram. Proceso 100% local.</p>
-<div id="drop" onclick="document.getElementById('file').click()">
-<span id="dropTxt">Toca para subir .txt o .pdf<br><small>Todo se queda en tu dispositivo</small></span>
+<div class="card">
+<h2 style="margin-top:0">Empieza por tu historia</h2>
+<p style="color:#6B6B6B;font-size:14px;line-height:1.5">Sube tu archivo.txt exportado. No lo guardamos. Todo ocurre en tu navegador. Nadie más lo ve.</p>
+
+<div class="drop" onclick="document.getElementById('file').click()">
+<div style="font-size:32px">📄</div>
+<b>Arrastra tu archivo aquí</b><br>
+<span style="font-size:13px;color:#888">o haz clic para seleccionar •.txt,.pdf</span>
 </div>
-<input type="file" id="file" accept=".txt,.pdf" hidden>
-<p id="status" style="font-size:13px;text-align:center;margin-top:10px;color:#666"></p>
+<input type="file" id="file" hidden accept=".txt,.pdf">
+
+<div id="result" style="display:none;margin-top:32px;border-top:1px solid #F0E9DF;padding-top:24px">
+<h2 style="font-size:24px" id="recCount">—</h2>
+<div id="resumen"></div>
+<button class="btn" onclick="alert('Aquí irá la generación VIA')">Generar mi Libro de Memoria</button>
+</div>
 </div>
 
-<div class="phone" id="resultPhone">
-<h3>📖 Tu Memoria</h3>
-<h2 style="margin:8px 0">Libro de Memoria</
+<p class="meta">Desde Las Heras, Santa Cruz, Argentina • Hecho para recordar • v0.1 alma</p>
+
+<script>
+document.getElementById('file').addEventListener('change', async e=>{
+ const f=e.target.files[0]; if(!f) return;
+ const txt=f.name.endsWith('.pdf')?'Demo pdf con recuerdos':await f.text();
+ const lineas=txt.split('\n').length;
+ document.getElementById('result').style.display='block';
+ document.getElementById('recCount').innerText=lineas+' fragmentos encontrados';
+ document.getElementById('resumen').innerHTML='<p style="color:#6B6B6B;font-size:14px">Hemos detectado '+txt.split(/\s+/).length+' palabras. Tu historia está lista para convertirse en libro.</p>';
+})
+</script>
+</body>
+</html>
