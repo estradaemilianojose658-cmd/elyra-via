@@ -1,60 +1,119 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Elyra VIA — Tu vida, en un libro que te recuerda</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VÍA - Bóveda | Tu IA te recuerda</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box}
-body{margin:0;background:#FBF8F3;color:#1A1A1A;font-family:'Inter',sans-serif}
-h1,h2{font-family:'Fraunces',serif;font-weight:700;letter-spacing:-0.02em}
-.hero{max-width:900px;margin:0 auto;padding:80px 24px 40px;text-align:center}
-.hero h1{font-size:56px;line-height:0.95;margin:0}
-.hero h1 em{font-style:italic;font-weight:400;color:#8B5E3C}
-.hero p{max-width:520px;margin:24px auto 0;color:#6B6B6B;line-height:1.6;font-size:18px}
-.card{max-width:680px;margin:40px auto;background:white;border-radius:24px;padding:32px;box-shadow:0 12px 40px rgba(0,0,0,0.06);border:1px solid #F0E9DF}
-.drop{border:1px dashed #D9C5B0;background:#FFFEFB;border-radius:16px;padding:40px 20px;text-align:center;cursor:pointer;transition:.2s}
-.drop:hover{background:#FDF6EC;border-color:#8B5E3C}
-.btn{background:#1A1A1A;color:white;border:0;padding:14px 28px;border-radius:999px;font-weight:500;cursor:pointer;width:100%;margin-top:16px}
-.meta{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:#9A9A9A;text-align:center;margin-top:80px}
+*{box-sizing:border-box} body{margin:0;background:#F6F1EB;color:#1E1B16;font-family:'Inter',sans-serif}
+.wrap{max-width:1240px;margin:0 auto;padding:40px 20px}
+.header{text-align:center;margin-bottom:32px}
+.header h1{font-family:'Fraunces',serif;font-size:38px;margin:0;letter-spacing:-.02em}
+.header p{color:#8A7D6E;margin:8px 0 0}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+@media(max-width:980px){.grid{grid-template-columns:1fr}.phone{max-width:390px;margin:0 auto}}
+.phone{background:#FFFDFA;border:1px solid #EDE6DC;border-radius:36px;box-shadow:0 20px 60px rgba(0,0,0,.08);padding:24px 20px 20px;position:relative;min-height:640px;display:flex;flex-direction:column}
+.top{display:flex;align-items:center;gap:10px;font-weight:600;font-size:15px;margin-bottom:18px}
+.icon{width:32px;height:32px;background:#FFF1E0;border-radius:10px;display:grid;place-items:center;font-size:18px}
+.label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#9B8D7D;font-weight:600;margin:14px 0 6px}
+.input{width:100%;background:#F8F3EC;border:1px solid #EDE6DC;border-radius:14px;padding:13px 14px;font-size:14px;outline:none}
+.input:focus{border-color:#C9A07A;background:white}
+.btn{width:100%;border:0;border-radius:999px;padding:14px;font-weight:600;cursor:pointer;font-size:14px}
+.btn-primary{background:#1E1B16;color:white}
+.btn-brown{background:#C9986B;color:white}
+.btn-brown:hover{background:#B8875B}
+.btn-ghost{background:white;border:1px solid #EDE6DC;color:#1E1B16}
+.drop{border:1.5px dashed #D8C7B0;background:#FFFEFB;border-radius:18px;padding:28px 16px;text-align:center;cursor:pointer;transition:.2s}
+.drop:hover{background:#FFF6E8;border-color:#C9986B}
+.drop.active{border-color:#1E1B16;background:#FFF1E0}
+.pills{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.pill{font-size:11px;background:#F8F3EC;border:1px solid #EDE6DC;padding:6px 10px;border-radius:999px;display:flex;align-items:center;gap:6px}
+.progressWrap{margin-top:18px;display:none}
+.bar{height:8px;background:#F0E6D6;border-radius:99px;overflow:hidden}
+.bar>div{height:100%;width:0%;background:linear-gradient(90deg,#C9986B,#E8C7A3);transition:width.3s}
+.metaRow{display:flex;justify-content:space-between;font-size:12px;color:#9B8D7D;margin-top:8px}
+.card-light{background:#FFF6E8;border:1px solid #F0E6D6;border-radius:16px;padding:14px;margin-top:16px}
+.book{background:#FFF9EF;border:1px solid #F0E6D6;border-radius:20px;padding:20px;text-align:center;margin-top:12px}
+.tag{font-size:11px;background:#E6F0FF;color:#3B5B8A;padding:4px 10px;border-radius:999px;display:inline-block;font-weight:500}
+.item{font-size:13px;background:#F8F3EC;border:1px solid #EDE6DC;border-radius:12px;padding:10px 12px;margin-top:8px;display:flex;gap:8px;align-items:center}
+.footer{font-size:11px;color:#B0A392;text-align:center;margin-top:auto;padding-top:20px}
 </style>
 </head>
 <body>
-<div class="hero">
-<p style="letter-spacing:0.2em;text-transform:uppercase;font-size:11px;color:#8B5E3C">Elyra VIA</p>
-<h1>Tu vida no cabe en un chat.<br><em>Merece un libro.</em></h1>
-<p>Convierte tus conversaciones de WhatsApp, Telegram o Instagram en una memoria viva. Privada. Tuya. Para que una IA te recuerde como tú te recuerdas.</p>
+<div class="wrap">
+<div class="header"><h1>VÍA — Bóveda</h1><p>Tu IA te recuerda. Privado, local y tuyo.</p></div>
+<div class="grid">
+
+<!-- 1 LOGIN -->
+<div class="phone" id="phone1">
+<div class="top"><div class="icon">🫙</div> VÍA - Bóveda</div>
+<p style="margin:0;color:#6B6052;font-size:13px">Tu IA te recuerda</p>
+<div class="label">Correo electrónico</div>
+<input class="input" id="email" placeholder="tu@correo.com" type="email">
+<div class="label">Contraseña</div>
+<input class="input" id="pass" placeholder="••••••••" type="password">
+<button class="btn btn-brown" style="margin-top:20px" onclick="login()">Iniciar sesión</button>
+<div style="display:flex;align-items:center;gap:12px;margin:16px 0"><div style="flex:1;height:1px;background:#EDE6DC"></div><span style="font-size:12px;color:#9B8D7D">o continuar con</span><div style="flex:1;height:1px;background:#EDE6DC"></div></div>
+<button class="btn btn-ghost" onclick="loginGoogle()"> <span style="font-weight:700">G</span> Continuar con Google</button>
+<p style="font-size:12px;text-align:center;margin-top:14px;color:#8A7D6E">¿No tienes cuenta? <b style="color:#1E1B16;cursor:pointer">Regístrate</b></p>
+<div class="footer" id="f1">Seguro y cifrado</div>
 </div>
 
-<div class="card">
-<h2 style="margin-top:0">Empieza por tu historia</h2>
-<p style="color:#6B6B6B;font-size:14px;line-height:1.5">Sube tu archivo.txt exportado. No lo guardamos. Todo ocurre en tu navegador. Nadie más lo ve.</p>
-
-<div class="drop" onclick="document.getElementById('file').click()">
-<div style="font-size:32px">📄</div>
-<b>Arrastra tu archivo aquí</b><br>
-<span style="font-size:13px;color:#888">o haz clic para seleccionar •.txt,.pdf</span>
-</div>
-<input type="file" id="file" hidden accept=".txt,.pdf">
-
-<div id="result" style="display:none;margin-top:32px;border-top:1px solid #F0E9DF;padding-top:24px">
-<h2 style="font-size:24px" id="recCount">—</h2>
-<div id="resumen"></div>
-<button class="btn" onclick="alert('Aquí irá la generación VIA')">Generar mi Libro de Memoria</button>
-</div>
+<!-- 2 IMPORTAR -->
+<div class="phone" id="phone2">
+<div class="top"><div class="icon">🫙</div> Importar tu memoria</div>
+<div class="drop" id="drop"><div style="font-size:32px">⤴️</div><b style="font-size:16px">Suelta aquí tu backup<br>.txt o.pdf</b><div class="pills" style="justify-content:center;margin-top:12px"><span class="pill">📄.txt</span><span class="pill">📕.pdf</span><span class="pill">🔒 Privado y cifrado</span></div></div>
+<input type="file" id="file" accept=".txt,.pdf" hidden>
+<div class="progressWrap" id="progWrap"><div class="label">Procesando tu archivo...</div><div class="bar"><div id="bar"></div></div><div class="metaRow"><span id="mbTxt">0 MB de 0 MB</span><span id="pctTxt">0%</span></div></div>
+<div class="card-light" id="infoCard"><b style="font-size:13px">🔒 100% privado</b><p style="font-size:12px;color:#6B6052;margin:6px 0 0;line-height:1.4">Diseñado para ser simple. Todo se procesa en tu dispositivo. Nada se sube al servidor.</p></div>
+<div class="footer">Arrastra y suelta • Funciona offline</div>
 </div>
 
-<p class="meta">Desde Las Heras, Santa Cruz, Argentina • Hecho para recordar • v0.1 alma</p>
+<!-- 3 MEMORIA -->
+<div class="phone" id="phone3">
+<div class="top"><div class="icon">🫙</div> Tu Memoria <span style="margin-left:auto">✨</span></div>
+<div><b style="font-family:'Fraunces',serif;font-size:18px">Libro de Memoria — 2024</b><div style="margin-top:6px"><span class="tag" id="tagFecha">Generado • Hoy</span></div></div>
+<div class="book"><div style="font-size:40px">📖</div><b id="recCount">Recuerdos capturados: --</b><div style="font-size:11px;color:#8A7D6E;margin-top:4px">Momentos • Conversaciones • Fotos • Notas</div></div>
+<div style="margin-top:16px"><b style="font-size:13px">Resumen de tu historia</b><div id="resumen"><div class="item">Sube tu archivo para ver tu resumen</div></div></div>
+<button class="btn btn-brown" style="margin-top:16px" onclick="copiarVIA()">✨ Copiar mi VÍA a ChatGPT</button>
+<button class="btn btn-ghost" style="margin-top:10px" onclick="chatear()">💬 Chatear aquí con mi IA que ya me conoce</button>
+<div class="footer" id="f3">Tu IA conoce tu historia • Lista para conversar</div>
+</div>
+
+</div>
+</div>
 
 <script>
-document.getElementById('file').addEventListener('change', async e=>{
- const f=e.target.files[0]; if(!f) return;
- const txt=f.name.endsWith('.pdf')?'Demo pdf con recuerdos':await f.text();
- const lineas=txt.split('\n').length;
- document.getElementById('result').style.display='block';
- document.getElementById('recCount').innerText=lineas+' fragmentos encontrados';
- document.getElementById('resumen').innerHTML='<p style="color:#6B6B6B;font-size:14px">Hemos detectado '+txt.split(/\s+/).length+' palabras. Tu historia está lista para convertirse en libro.</p>';
-})
-</script>
-</body>
-</html>
+let textoCompleto=""; let fileObj=null;
+function login(){ const e=document.getElementById('email').value.trim(); if(!e.includes('@')){alert('Ingresa un correo válido');return} document.getElementById('f1').innerText='Sesión: '+e; document.getElementById('phone2').scrollIntoView({behavior:'smooth'}); }
+function loginGoogle(){ document.getElementById('f1').innerText='Continuar con Google (demo)'; document.getElementById('phone2').scrollIntoView({behavior:'smooth'}); }
+
+const drop=document.getElementById('drop'); const fileIn=document.getElementById('file');
+drop.onclick=()=>fileIn.click();
+drop.ondragover=e=>{e.preventDefault();drop.classList.add('active')};
+drop.ondragleave=()=>drop.classList.remove('active');
+drop.ondrop=e=>{e.preventDefault();drop.classList.remove('active'); handleFile(e.dataTransfer.files[0])};
+fileIn.onchange=e=>handleFile(e.target.files[0]);
+
+function handleFile(f){
+ if(!f) return; fileObj=f; textoCompleto="";
+ const isPdf=f.name.toLowerCase().endsWith('.pdf');
+ const total=f.size; const mb=(total/1024/1024).toFixed(1);
+ document.getElementById('progWrap').style.display='block';
+ document.getElementById('infoCard').style.display='none';
+ let pct=0; const bar=document.getElementById('bar'); const mbTxt=document.getElementById('mbTxt'); const pctTxt=document.getElementById('pctTxt');
+ const interval=setInterval(()=>{ pct+=Math.random()*18+8; if(pct>=100)pct=100; bar.style.width=pct+'%'; mbTxt.innerText=(mb*pct/100).toFixed(1)+' MB de '+mb+' MB'; pctTxt.innerText=Math.round(pct)+'% completado'; if(pct>=100){clearInterval(interval); finalize(f,isPdf)} },180);
+}
+
+async function finalize(f,isPdf){
+ let txt=""; if(isPdf){ txt="Infancia en Málaga, familia y viajes. Proyecto universitario música y aprendizaje. Reflexiones recientes bienestar y metas. "+ "contenido ".repeat(300); }
+ else { txt=await f.text(); }
+ textoCompleto=txt;
+ const palabras=txt.split(/\s+/).length; const lineas=txt.split('\n').length;
+ document.getElementById('recCount').innerText='Recuerdos capturados: '+Math.min(999,Math.max(24,lineas));
+ document.getElementById('tagFecha').innerText='Generado • Hoy • '+palabras+' palabras';
+ const temas=[];
+ if(/málaga|familia|infancia|viaje/i.test(txt)) temas.push('Infancia en Málaga • Familia y viajes');
+ if(/universidad|proyecto|música|estudio|aprendizaje/i.test(txt)) temas.push('Proyecto universitario • Música y aprendizaje');
+ if(/reflex|bienestar|meta|futuro/i.test(txt)) temas.push('Reflexiones recientes • Bienestar y metas');
+ if(temas.length==0) temas.push('Conversaciones clave • Personas importantes
