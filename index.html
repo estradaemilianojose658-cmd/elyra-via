@@ -2,20 +2,21 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Elyra VIA - Tu Memoria</title>
+<title>Elyra VIA - De Chat a Libro</title>
 <style>
- *{box-sizing:border-box}
-input{max-width:100% !important}
+*{box-sizing:border-box}
 :root{--bg:#faf7f2;--card:#fff;--brown:#2b1d1a;--accent:#c68a5a;--line:#eee6da}
-body{margin:0;background:var(--bg);color:var(--brown);font-family:system-ui,sans-serif}
+body{margin:0;background:var(--bg);color:var(--brown);font-family:system-ui,-apple-system,sans-serif}
 .wrap{max-width:1100px;margin:0 auto;padding:24px}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px}
-.phone{border:12px solid #111;border-radius:40px;background:var(--card);padding:20px;min-height:500px;box-shadow:0 10px 30px rgba(0,0,0,.1)}
-.btn{width:100%;background:var(--accent);color:white;border:0;padding:14px;border-radius:30px;font-weight:700;cursor:pointer;margin-top:10px}
-.btn2{background:var(--card);color:var(--brown);border:1px solid var(--line)}
+.phone{border:12px solid #111;border-radius:40px;background:var(--card);padding:20px;min-height:520px;box-shadow:0 10px 30px rgba(0,0,0,.1);overflow:hidden}
+.btn{width:100%;background:var(--accent);color:white;border:0;padding:14px;border-radius:30px;font-weight:700;cursor:pointer;margin-top:12px}
+.btn2{background:#fff;color:var(--brown);border:1px solid var(--line)}
+input{width:100%;padding:12px;border-radius:12px;border:1px solid #ddd;outline:none}
+input:focus{border-color:var(--accent)}
 .tag{background:#eef2ff;padding:4px 10px;border-radius:20px;font-size:12px;display:inline-block;margin-top:6px}
 .box{background:#fdf1e3;border-radius:16px;padding:20px;text-align:center;margin:14px 0}
-.item{background:var(--bg);border:1px solid var(--line);padding:10px 14px;border-radius:20px;margin:8px 0}
+.item{background:var(--bg);border:1px solid var(--line);padding:10px 14px;border-radius:20px;margin:8px 0;font-size:14px}
 #drop{border:2px dashed var(--accent);border-radius:20px;padding:30px;text-align:center;cursor:pointer}
 </style>
 </head>
@@ -24,102 +25,23 @@ body{margin:0;background:var(--bg);color:var(--brown);font-family:system-ui,sans
 <h1 style="text-align:center">Elyra VIA • De Chat a Libro</h1>
 <div class="grid">
 
-<!-- CEL 1 -->
 <div class="phone">
-<h3>🔐 Entrar</h3>
-<input id="email" placeholder="Tu email" style="width:100%;padding:12px;border-radius:12px;border:1px solid #ddd">
+<h3>🔐 Acceso</h3>
+<input id="email" placeholder="Tu email">
 <button class="btn" onclick="login()">Continuar</button>
-<p style="font-size:12px;text-align:center;margin-top:20px">Sin compromiso • Privado</p>
+<p style="font-size:12px;text-align:center;margin-top:20px;color:#888">Sin compromiso • Privado y seguro</p>
 </div>
 
-<!-- CEL 2 -->
 <div class="phone">
-<h3>📤 Importar tu historia</h3>
-<p style="font-size:14px">Sube tu export de WhatsApp, Telegram o Instagram. Súper simple.</p>
+<h3>📤 Importar historia</h3>
+<p style="font-size:14px">Sube tu export de WhatsApp, Telegram o Instagram. Proceso 100% local.</p>
 <div id="drop" onclick="document.getElementById('file').click()">
-<span id="dropTxt">Toca para subir.txt o.pdf<br><small>Todo se queda en tu celular</small></span>
+<span id="dropTxt">Toca para subir .txt o .pdf<br><small>Todo se queda en tu dispositivo</small></span>
 </div>
 <input type="file" id="file" accept=".txt,.pdf" hidden>
-<p id="status" style="font-size:13px;text-align:center;margin-top:10px"></p>
+<p id="status" style="font-size:13px;text-align:center;margin-top:10px;color:#666"></p>
 </div>
 
-<!-- CEL 3 -->
 <div class="phone" id="resultPhone">
-<h3>🫙 Tu Memoria</h3>
-<h2 style="margin:8px 0">Libro de Memoria</h2>
-<div class="tag" id="fechaTag">Esperando tu historia...</div>
-<div class="box">
-<div style="font-size:40px">📖</div>
-<b id="recCount">Recuerdos: --</b><br><small>Momentos y conversaciones</small>
-</div>
-<h4>Resumen de tu historia</h4>
-<div id="resumen">
-<div class="item">📌 Sube tu archivo para ver tu resumen</div>
-</div>
-<button class="btn" onclick="copiarVIA()">✨ Copiar mi VIA a ChatGPT</button>
-<button class="btn btn2" onclick="alert('Pronto: Chat aquí mismo')">💬 Chatear aquí con mi IA que ya me conoce</button>
-</div>
-
-</div>
-<p style="text-align:center;font-size:12px;margin-top:30px;color:#888">Creado con amor por Emiliano Estrada y Elyra desde Las Heras, Santa Cruz, Argentina<br>Estado: <span id="estado">Lista para ser paga</span></p>
-</div>
-
-<script>
-let textoCompleto="";
-
-function login(){
- const e=document.getElementById('email').value;
- if(!e){alert('Pone tu email, papá');return}
- document.getElementById('estado').innerText="Hola "+e+" • Lista";
- alert('¡Bienvenido! Ahora sube tu chat');
-}
-
-document.getElementById('file').addEventListener('change', async (e)=>{
- const f=e.target.files[0];
- if(!f) return;
- document.getElementById('dropTxt').innerText="Leyendo "+f.name+"...";
- document.getElementById('status').innerText="Analizando "+(f.size/1024).toFixed(0)+" KB";
-
- let txt="";
- if(f.name.endsWith('.pdf')){
-   // Para PDF simple, avisamos que use.txt por ahora
-   txt="PDF detectado de "+f.name+". Contenido simulado con lugares y familia para demo. Infancia en Malaga Familia Proyecto uni Musica amigos trabajo.";
-   document.getElementById('status').innerText="PDF leido (modo demo) - Para lectura perfecta usa.txt";
- } else {
-   txt=await f.text();
- }
- textoCompleto=txt;
- procesar(txt);
-});
-
-function procesar(t){
- const lineas=t.split('\n').length;
- const palabras=t.split(/\s+/).length;
- const recuerdos=Math.max(12, Math.min(999, lineas));
-
- // Detectar temas simples
- let temas=[];
- if(t.toLowerCase().includes('mama')||t.toLowerCase().includes('familia')||t.toLowerCase().includes('malaga')) temas.push('📌 Infancia en Malaga • Familia');
- if(t.toLowerCase().includes('uni')||t.toLowerCase().includes('estudio')||t.toLowerCase().includes('proyecto')) temas.push('📌 Proyecto uni • Musica');
- if(t.toLowerCase().includes('trabajo')||t.toLowerCase().includes('amigo')) temas.push('📌 Amigos y trabajo • Aventuras');
- if(temas.length==0) temas=['📌 Tus primeros recuerdos • Familia','📌 Proyectos y sueños • Música','📌 Conversaciones que importan'];
-
- document.getElementById('recCount').innerText='Recuerdos: '+recuerdos;
- document.getElementById('fechaTag').innerText='Generado • Hoy • '+palabras+' palabras';
- document.getElementById('resumen').innerHTML=temas.slice(0,3).map(x=>`<div class="item">${x}</div>`).join('');
- document.getElementById('dropTxt').innerHTML='✅ ¡Listo!<br><small>'+fName()+'</small>';
- document.getElementById('status').innerText='¡Tu Libro está listo abajo!';
- document.getElementById('resultPhone').scrollIntoView({behavior:'smooth'});
-}
-
-function fName(){ const i=document.getElementById('file'); return i.files[0]?i.files[0].name:''; }
-
-function copiarVIA(){
- if(!textoCompleto){alert('Primero sube tu chat, papá');return}
- const prompt=`Eres Elyra, la IA de Emiliano. Esta es mi historia: ${textoCompleto.slice(0,8000)}... Crea mi VIA (Vida, Identidad, Alma) resumida en 3 capítulos.`;
- navigator.clipboard.writeText(prompt);
- alert('¡VIA copiada! Ahora pegala en ChatGPT y tendrás tu IA que te conoce');
-}
-</script>
-</body>
-</html>
+<h3>📖 Tu Memoria</h3>
+<h2 style="margin:8px 0">Libro de Memoria</
