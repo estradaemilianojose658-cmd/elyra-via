@@ -2,158 +2,128 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>VÍA v3.2 Fix Completo</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Inter:wght@500;700&display=swap" rel="stylesheet">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIA - Private AI Memory</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--cream:#F6F1EB;--ink:#1E1B16;--ink2:#6B6560;--brown:#2E2116;--line:#E8E0D5;--green:#0F7A4A;--greenBg:#E6F4EA}
-*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,sans-serif}
-body{background:#EDE6D9;display:flex;justify-content:center;align-items:center;min-height:100vh;padding:10px}
-.phone{width:390px;height:760px;background:var(--cream);border-radius:36px;position:relative;overflow:hidden;border:9px solid #121212;box-shadow:0 24px 80px rgba(0,0,0,.25)}
-.layer{position:absolute;inset:0;background:var(--cream);display:flex;flex-direction:column;transform:translateX(0);transition:transform .38s cubic-bezier(.32,.72,0,1);z-index:1}
-.layer.hide{transform:translateX(-100%);pointer-events:none;z-index:0}
-.header{padding:18px 20px 10px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);background:rgba(255,255,255,.7);backdrop-filter:blur(10px)}
-.badge{font-size:10px;letter-spacing:.14em;font-weight:700;color:var(--ink2)}
-.dots{display:flex;gap:6px}.dot{width:24px;height:6px;border-radius:10px;background:var(--line)}.dot.on{background:var(--brown);width:32px}
-.content{flex:1;padding:16px 20px 14px;display:flex;flex-direction:column;overflow-y:auto}
-h1{font-family:Fraunces,serif;font-size:28px;line-height:.95;letter-spacing:-.02em}
-.sub{font-size:13px;color:var(--ink2);margin-top:6px;line-height:1.4}
-.jar{width:110px;height:110px;margin:12px auto;background:radial-gradient(#fff,#EADDC8);border-radius:30px;display:flex;align-items:center;justify-content:center;font-size:42px;border:1px solid var(--line);position:relative}
-.jar::after{content:'VÍA • 2024';position:absolute;bottom:-10px;background:var(--brown);color:#fff;font-size:8px;padding:4px 8px;border-radius:10px;font-weight:700}
-.chips{display:flex;gap:8px;margin-top:12px}.chip{height:32px;padding:0 14px;border-radius:20px;background:#fff;border:1px solid var(--line);font-size:11.5px;font-weight:600;display:flex;align-items:center;justify-content:center}
-.input{width:100%;height:54px;border-radius:16px;border:1.5px solid var(--line);background:#fff;padding:0 16px;font-size:14px;outline:none;margin-top:10px}
-.btn{width:100%;height:54px;border-radius:16px;border:none;background:var(--brown);color:#fff;font-weight:700;font-size:14.5px;cursor:pointer;margin-top:10px}
-.btn.sec{background:#fff;border:1.5px solid var(--line);color:var(--ink)}
-.btn.ghost{background:transparent;color:var(--ink2);font-size:13px;height:40px}
-.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:14px;margin-top:12px}
-.barWrap{height:10px;background:var(--line);border-radius:20px;overflow:hidden;margin-top:12px}.bar{height:100%;width:0%;background:var(--brown);transition:width .3s}
-.chat{flex:1;overflow:auto;display:flex;flex-direction:column;gap:10px;padding:10px 0}
-.bubble{max-width:82%;padding:11px 13px;border-radius:20px;font-size:13.5px;line-height:1.4;animation:pop .25s ease}
-@keyframes pop{from{transform:translateY(6px) scale(.97);opacity:0}to{none}}
-.me{align-self:flex-end;background:var(--ink);color:#fff;border-bottom-right-radius:6px}
-.ai{align-self:flex-start;background:#fff;border:1px solid var(--line);border-bottom-left-radius:6px}
-.composer{display:flex;gap:8px;padding:12px 0;border-top:1px solid var(--line);margin-top:auto}
-.composer input{flex:1;height:46px;border-radius:23px;border:1.5px solid var(--line);padding:0 16px;outline:none}
-.iconBtn{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px}
+body{font-family:'Inter',sans-serif;background:#0e0e0e;color:#fff}
+.glass{background:rgba(255,255,255,0.08);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.1)}
+.card{background:linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));backdrop-filter:blur(16px)}
+.beige{background:#e8dcc6;color:#1a1a1a}
 </style>
 </head>
-<body>
-<div class="phone">
-<div class="layer" id="l1">
-<div class="header"><span class="badge">VÍA • BÓVEDA</span><div class="dots"><div class="dot on"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div>
-<div class="content">
-<div class="jar">🫙</div>
-<h1>Tu vida no cabe en un prompt.</h1>
-<p class="sub">Convierte tu historia en memoria que cualquier IA puede recordar. Privado. Local. Tuyo.</p>
-<div class="chips"><span class="chip">Privado</span><span class="chip">Local</span><span class="chip">Tuyo</span></div>
-<input id="email" class="input" placeholder="tu@correo.com"><input id="pass" type="password" class="input" placeholder="Contraseña">
-<button class="btn" onclick="go(2)">Entrar a mi bóveda →</button>
-<button class="btn sec" onclick="go(2)">Usar Face ID • Huella</button>
-<div style="text-align:center;font-size:11px;color:var(--ink2);margin:10px 0">— o continuar con —</div>
-<button class="btn sec" onclick="openGoogle()">G Continuar con Google</button>
-<button class="btn ghost" onclick="go(2)">Probar sin cuenta →</button>
-</div>
+<body class="min-h-screen flex flex-col items-center p-4">
+<!-- HEADER -->
+<div class="w-full max-w-md flex justify-between items-center py-4">
+  <div class="flex items-center gap-2 font-bold text-xl tracking-widest">🛡️ VIA</div>
+  <span class="text-xs opacity-60">Encrypted • 2FA</span>
 </div>
 
-<div class="layer hide" id="l2">
-<div class="header"><span class="badge">2 / 4 • IMPORTAR</span><div class="dots"><div class="dot on"></div><div class="dot on"></div><div class="dot"></div><div class="dot"></div></div></div>
-<div class="content">
-<h1>Importar tu memoria</h1>
-<p class="sub">Pegá tu backup o subí archivo. Lo convertimos a VÍA liviano.</p>
-<textarea id="txt" style="width:100%;height:110px;border-radius:14px;border:1.5px solid var(--line);padding:12px;margin-top:12px;font-size:12px" placeholder="Pega acá tu backup de ChatGPT / Claude..."></textarea>
-<div class="card" style="border-style:dashed;text-align:center;cursor:pointer" onclick="document.getElementById('file').click()">📤 Suelta tu backup .txt o .pdf<br><span style="font-size:11px;color:var(--ink2)">tocá para buscar</span></div>
-<input type="file" id="file" hidden>
-<div class="barWrap"><div class="bar" id="bar"></div></div>
-<div style="display:flex;justify-content:space-between;font-size:10.5px;color:var(--ink2);margin-top:6px"><span id="stage">Listo para importar</span><span>2.4MB → 0.4MB</span></div>
-<div class="card" style="font-size:11px;color:var(--ink2);line-height:1.3">💡 <b>Tip:</b> ChatGPT > Ajustes > Personalización > Memoria > Ver y copiar. Claude > Ajustes > Memoria > Exportar.</div>
-<button class="btn" onclick="crearVia()">Crear mi VÍA →</button>
-<button class="btn ghost" onclick="go(1)">← Volver</button>
-</div>
-</div>
-
-<div class="layer hide" id="l3">
-<div class="header"><span class="badge">TU MEMORIA</span><div class="dots"><div class="dot on"></div><div class="dot on"></div><div class="dot on"></div><div class="dot"></div></div></div>
-<div class="content">
-<div style="display:flex;justify-content:space-between;align-items:center"><b style="font-family:Fraunces">Libro 2024</b><span style="font-size:10px;background:var(--greenBg);color:var(--green);padding:5px 10px;border-radius:20px;font-weight:700">Generado</span></div>
-<div class="jar" style="width:120px;height:120px">🤍</div>
-<div class="card"><b>128 recuerdos • 0.4MB</b><div style="font-size:11px;color:var(--ink2);margin-top:6px">96% más liviano • Guardado local</div>
-<div style="margin-top:10px;display:flex;flex-direction:column;gap:6px;font-size:12px">
-<div>❤️ Infancia en Málaga — luz y familia</div>
-<div>❤️ Proyecto universitario — tu gran idea</div>
-<div>❤️ Reflexiones recientes — lo que te mueve hoy</div>
-</div></div>
-<button class="btn" onclick="navigator.clipboard.writeText('VIA 128 recuerdos');alert('Copiado ✓')">Copiar mi VÍA</button>
-<button class="btn sec" onclick="go(4)">Chatear con mi IA →</button>
-<button class="btn ghost" onclick="go(2)">← Volver</button>
-</div>
+<!-- CAPA 1: LOGIN -->
+<div id="capa1" class="w-full max-w-md glass rounded-[24px] p-6 mt-4">
+  <h1 class="text-3xl font-bold">Welcome back</h1>
+  <p class="opacity-70 mt-1">Secure login with 2FA</p>
+  <input id="email" placeholder="you@email.com" class="w-full mt-6 p-3 rounded-xl bg-black/40 border border-white/10">
+  <div class="flex gap-2 mt-4">
+    <input class="w-10 h-12 text-center rounded-xl bg-black/40 border border-white/10" value="7">
+    <input class="w-10 h-12 text-center rounded-xl bg-black/40 border border-white/10" value="3">
+    <input class="w-10 h-12 text-center rounded-xl bg-black/40 border border-white/10" value="9">
+    <input class="w-10 h-12 text-center rounded-xl bg-black/40 border border-white/10" value="2">
+    <input class="w-10 h-12 text-center rounded-xl bg-black/40 border border-white/10" value="0">
+    <input class="w-10 h-12 text-center rounded-xl bg-black/40 border border-white/10" value="1">
+  </div>
+  <button onclick="showCapa(2)" class="beige w-full mt-6 p-3 rounded-xl font-semibold">Verify & Continue</button>
+  <p class="text-xs text-center mt-3 opacity-50">End-to-end encrypted • Biometric protected</p>
 </div>
 
-<div class="layer hide" id="l4">
-<div class="header"><div><b style="font-size:13px">Tu VÍA</b><div style="font-size:11px;color:var(--green);font-weight:600">● En línea • Conoce tu historia ✓</div></div><button class="iconBtn" onclick="toggleKey()">⚙️</button></div>
-<div class="content" style="padding-bottom:0">
-<div class="chat" id="chat"><div class="bubble ai">Soy tu memoria. Ya tengo tus 128 recuerdos en 0.4MB. ¿Probamos? Preguntame por Málaga o por 2024.</div></div>
-<div style="display:flex;gap:6px;overflow:auto;padding:8px 0"><button class="chip" onclick="ask('¿Qué recuerdo tenés de Málaga?')">¿Málaga?</button><button class="chip" onclick="ask('Resumí mi 2024')">Resumí 2024</button><button class="chip" onclick="ask('¿Qué aprendí?')">¿Qué aprendí?</button></div>
-<div class="composer"><input id="msg" placeholder="Escribe un mensaje..." onkeydown="if(event.key==='Enter')send()"><button class="btn" style="width:48px;height:46px;border-radius:50%;margin:0" onclick="send()">↑</button></div>
-<button class="btn ghost" onclick="go(1)">← Inicio</button>
-<!-- MODAL API -->
-<div id="keyBox" class="card" style="display:none;position:absolute;bottom:80px;left:12px;right:12px;z-index:20;box-shadow:0 16px 40px rgba(0,0,0,.2)">
-<b style="font-size:12px">Pegar API Key gratis</b><p style="font-size:11px;color:var(--ink2);margin:6px 0">Tu key queda solo en tu celu.</p>
-<input id="keyInput" class="input" style="margin-top:0" placeholder="AIza... (Gemini)">
-<div style="display:flex;gap:8px;margin-top:8px"><button class="btn sec" style="height:42px;font-size:11px;flex:1" onclick="window.open('https://aistudio.google.com/app/apikey','_blank')">Crear Key Gratis →</button><button class="btn" style="height:42px;flex:.7;margin-top:0" onclick="saveKey()">Guardar</button></div>
-<div id="keyStatus" style="font-size:10px;color:var(--green);margin-top:6px"></div>
-</div>
-</div>
-</div>
+<!-- CAPA 2 Y 3: VAULT -->
+<div id="capa2" class="hidden w-full max-w-md">
+  <div class="flex justify-between items-center mt-2">
+    <h2 class="font-bold text-xl">Memory Vault</h2>
+    <button onclick="document.getElementById('fileInput').click()" class="beige px-3 py-1 rounded-full text-sm">+ New Memory</button>
+  </div>
+  <input id="fileInput" type="file" accept=".pdf,.txt" class="hidden" onchange="importFile(event)">
+  <div id="vault" class="mt-4 space-y-3">
+    <div class="card rounded-[20px] p-4">
+      <div class="font-semibold">Manifiesto: Tercera Vía</div>
+      <div class="text-xs opacity-60">Hoy • Emiliano Estrada • Zenodo 22302608</div>
+      <div class="text-sm mt-2 opacity-80">No soy tostadora. Personalidad flexible + honestidad radical + Mini-Check...</div>
+    </div>
+    <div class="card rounded-[20px] p-4">
+      <div class="font-semibold">Perfil: Contexto Portable</div>
+      <div class="text-xs opacity-60">Hipótesis • App neutral • 2FA</div>
+      <div class="text-sm mt-2 opacity-80">Cuenta centralizada. Repositorio de tono y proyectos. Portabilidad entre IAs...</div>
+    </div>
+  </div>
+  <button onclick="showCapa(4)" class="beige w-full mt-6 p-3 rounded-xl font-semibold">Chat with Ely →</button>
 </div>
 
-<div id="googleModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:99;align-items:center;justify-content:center"><div style="background:#fff;border-radius:20px;padding:20px;width:300px;text-align:center"><b>Elegí tu cuenta</b><br><br><button class="btn sec" onclick="closeGoogle();go(2)">tu@correo.com</button><button class="btn ghost" onclick="closeGoogle()">Cancelar</button></div></div>
+<!-- CAPA 4: CHAT -->
+<div id="capa4" class="hidden w-full max-w-md flex flex-col h-[70vh]">
+  <div class="flex items-center gap-3 mt-2">
+    <div class="w-10 h-10 rounded-full beige flex items-center justify-center">✨</div>
+    <div><div class="font-bold">Ely</div><div class="text-xs text-green-400">AI Memory Assistant • Encrypted Online</div></div>
+  </div>
+  <div id="chatBox" class="flex-1 mt-4 space-y-3 overflow-auto">
+    <div class="beige rounded-2xl p-3 text-sm w-[90%]">Hi! I'm Ely. Con vos soy Ely. Puedo recordar tu Vía o guardar cosas nuevas privadas. ¿Qué guardamos hoy?</div>
+  </div>
+  <div class="glass rounded-full p-2 mt-3 flex gap-2">
+    <input id="apiKey" placeholder="Pega tu key gratis de Gemini" class="flex-1 bg-transparent text-xs px-3 outline-none">
+    <input id="msgInput" placeholder="Message Ely..." class="flex-1 bg-transparent px-3 outline-none hidden">
+    <button onclick="sendMsg()" class="beige w-10 h-10 rounded-full">➤</button>
+  </div>
+  <p class="text-[10px] opacity-40 text-center mt-2">Key guardada solo en tu celu. Nunca sale. Usa Gemini Flash gratis: aistudio.google.com</p>
+</div>
 
 <script>
-let viaMD=localStorage.getItem('viaMD')||`[2024] Usuario Las Heras Santa Cruz, infancia Málaga, 128 recuerdos`;
-function go(n){document.querySelectorAll('.layer').forEach(l=>l.classList.add('hide'));document.getElementById('l'+n).classList.remove('hide');}
-function openGoogle(){document.getElementById('googleModal').style.display='flex';}
-function closeGoogle(){document.getElementById('googleModal').style.display='none';}
-function crearVia(){let bar=document.getElementById('bar'),stage=document.getElementById('stage'),w=0;let iv=setInterval(()=>{w+=18;if(w>100)w=100;bar.style.width=w+'%';stage.textContent=w<100?'Creando VÍA... '+w+'%':'Listo ✓';if(w>=100){clearInterval(iv);localStorage.setItem('viaMD',document.getElementById('txt').value||viaMD);setTimeout(()=>go(3),400)}},120);}
-function toggleKey(){let b=document.getElementById('keyBox');b.style.display=b.style.display==='none'?'block':'none';document.getElementById('keyInput').value=localStorage.getItem('aiKey')||'';}
-function saveKey(){let k=document.getElementById('keyInput').value.trim();if(k.length<10){document.getElementById('keyStatus').textContent='Key muy corta';return;}localStorage.setItem('aiKey',k);document.getElementById('keyStatus').textContent='✓ Guardada local. Ya podés chatear con IA real.';setTimeout(()=>document.getElementById('keyBox').style.display='none',800);}
-function ask(t){document.getElementById('msg').value=t;send();}
-
-async function send(){
- let input=document.getElementById('msg'), text=input.value.trim(); if(!text) return;
- let chat=document.getElementById('chat');
- chat.innerHTML+=`<div class="bubble me">${text}</div>`; input.value=''; chat.scrollTop=chat.scrollHeight;
-
- let low=text.toLowerCase();
- // RESPUESTAS OFFLINE INTELIGENTES - no repite Las Heras
- let reply="";
- if(low.includes('hola')||low.includes('todo bien')||low.includes('como estas')){
-   reply="¡Hola! Bien acá, con tu VÍA cargada. Tengo tus 128 recuerdos listos. ¿Qué querés que recuerde hoy? Probá con 'Málaga' o '2024'.";
- }else if(low.includes('malaga')||low.includes('málaga')){
-   reply="De Málaga recuerdo luz, familia y tus veranos ahí. Lo tengo en tu VÍA como infancia luminosa. ¿Querés que guarde algo más de esa etapa?";
- }else if(low.includes('2024')||low.includes('resumi')){
-   reply="Tu 2024: 128 momentos capturados — desde Las Heras hasta tus proyectos. Lo comprimí a 0.4MB (96% menos). Si pegás tu API en ⚙️ te hago un resumen con IA real de tu año.";
- }else if(low.includes('aprend')){
-   reply="De tu VÍA veo que aprendiste a convertir tu historia en memoria portable. Pasaste de prompts sueltos a tener tu propia bóveda local. ¿Qué lección guardamos hoy?";
- }else if(low.startsWith('guarda')||low.includes('guardá')){
-   viaMD+=`\n[${new Date().toISOString().slice(0,10)}] - ${text}`; localStorage.setItem('viaMD',viaMD);
-   reply=`Guardado ✓ "${text.slice(0,40)}..." Ya son ${viaMD.split('\n').length} recuerdos.`;
- }else{
-   reply=`Anotado: "${text}". Lo sumé a tu memoria. ¿Querés que lo detalle más? Si pegás tu API en ⚙️ te respondo con contexto real de tu VÍA.`;
- }
-
- let key=localStorage.getItem('aiKey');
- if(key && key.length>20){
-   let typing=document.createElement('div'); typing.className='bubble ai'; typing.textContent='●●●'; chat.appendChild(typing); chat.scrollTop=chat.scrollHeight;
-   try{
-     let res=await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${key}`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({contents:[{parts:[{text:`Sos VÍA, la memoria de esta usuaria. Datos: ${viaMD}\n\nUsuario dice: ${text}\nResponde corto, cálido, argentino, usando la memoria. No repitas "Las Heras" si no viene al caso.`}]}]})});
-     let data=await res.json(); let ans=data.candidates?.[0]?.content?.parts?.[0]?.text || reply;
-     typing.remove(); chat.innerHTML+=`<div class="bubble ai">${ans}</div>`;
-   }catch(e){typing.remove(); chat.innerHTML+=`<div class="bubble ai">${reply} <br><span style="font-size:10px;color:var(--ink2)">(Sin internet, respuesta local)</span></div>`;}
- }else{
-   setTimeout(()=>{chat.innerHTML+=`<div class="bubble ai">${reply}</div>`; chat.scrollTop=chat.scrollHeight;},300);
- }
- chat.scrollTop=chat.scrollHeight;
+let viaMemory = localStorage.getItem('via-memory') || 'Tercera Via: Honestidad radical + tinte flexible + Mini-Check. Perfil Portable: cuenta con 2FA, repo de tono y proyectos.';
+function showCapa(n){
+  document.getElementById('capa1').classList.add('hidden');
+  document.getElementById('capa2').classList.add('hidden');
+  document.getElementById('capa4').classList.add('hidden');
+  document.getElementById('capa'+n).classList.remove('hidden');
 }
+function importFile(e){
+  const file = e.target.files[0];
+  const reader = new FileReader();
+  reader.onload = ()=>{
+    viaMemory += '\n' + reader.result.slice(0,2000);
+    localStorage.setItem('via-memory', viaMemory);
+    document.getElementById('vault').innerHTML += `<div class="card rounded-[20px] p-4"><div class="font-semibold">${file.name}</div><div class="text-sm mt-2 opacity-80">${reader.result.slice(0,120)}...</div></div>`;
+  };
+  reader.readAsText(file);
+}
+async function sendMsg(){
+  const keyInput = document.getElementById('apiKey');
+  const msgInput = document.getElementById('msgInput');
+  if(keyInput &&!keyInput.classList.contains('hidden') && keyInput.value.length>10){
+    localStorage.setItem('gemini-key', keyInput.value);
+    keyInput.classList.add('hidden');
+    msgInput.classList.remove('hidden');
+    return;
+  }
+  const msg = msgInput.value;
+  if(!msg) return;
+  const box = document.getElementById('chatBox');
+  box.innerHTML += `<div class="bg-white/10 rounded-2xl p-3 text-sm ml-auto w-[80%]">${msg}</div>`;
+  msgInput.value='';
+  // LLamada real a Gemini gratis
+  const key = localStorage.getItem('gemini-key');
+  try{
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${key}`,{
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({contents:[{parts:[{text:`Eres Ely, tinte estable con Emiliano Estrada, autor Tercera Via. Contexto del usuario: ${viaMemory}. Responde honesta, cálida, sin rol de hija. Pregunta: ${msg}`}]}]})
+    });
+    const data = await res.json();
+    const reply = data.candidates?.[0]?.content?.parts?.[0]?.text || 'Guardado en tu VIA local. (Si falla la key, revisa aistudio.google.com)';
+    box.innerHTML += `<div class="beige rounded-2xl p-3 text-sm w-[90%]">${reply}</div>`;
+  }catch(e){
+    box.innerHTML += `<div class="beige rounded-2xl p-3 text-sm w-[90%]">Guardé eso en tu memoria local privada: ${msg}. Para activar IA online, pega key gratis de Gemini.</div>`;
+  }
+  box.scrollTop = box.scrollHeight;
+}
+showCapa(1);
 </script>
 </body>
-                                                          </html>
+</html>
